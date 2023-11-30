@@ -32,7 +32,7 @@ seleccion = st.sidebar.selectbox(
 if seleccion == "Bienvenida":
     # left_co, cent_co, last_co = st.columns(3)
     # with cent_co:
-    st.title("""Bienvenidos a Predicting Sucess""")
+    st.title("""Bienvenidos a Predicting Success""")
     st.divider()
     logo = Image.open("recursos/logo.jpg")
     # left_co, cent_co, last_co = st.columns(3)
