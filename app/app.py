@@ -3,21 +3,8 @@ from PIL import Image
 import streamlit.components.v1 as c
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder
-import seaborn as sns
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
-from sklearn.linear_model import LogisticRegression
-from sklearn.decomposition import PCA
-import warnings
-from scipy.stats import boxcox
-from sklearn.preprocessing import PowerTransformer
-from scipy import stats
 import pickle
-import time
+
 
 # configuración de la página
 
@@ -611,7 +598,7 @@ R2: 0.64
         """
         )
 
-    with st.expander("Métricas y decisión final"):
+    with st.expander("Métricas, evaluación y decisión final"):
         st.write(
             """La métrica en la que queremos basarnos para la eleccion del modelo es el Mape debido a que estamos hablando de predecir cientos de miles de dolares y creemos que resulta mas entendible manejar porcentajes de error."""
         )
@@ -654,25 +641,73 @@ MAE con PCA: 67489365.6
 MAPE con PCA: 7.85 %
 R2 con PCA: 0.64"""
         )
-# elif seleccion == "Cliente":
-# df = pd.read_csv("app/recursos/red_recarga_acceso_publico.csv", sep=";")
 
-# filtro = st.sidebar.selectbox("Selecciona un distrito", df["DISTRITO"].unique())
-# df_filtered = df[df["DISTRITO"] == filtro]
-# st.write(df_filtered)
+        st.divider()
 
-# file = open("data/heatmap.html", "r")
-# c.html(file.read(), height=400)
+        st.write(
+            "Aquí podemos visualizar el recorrido de la curva de aprendizaje, es decir podemos ver si añadiendo mas datos de entrenamiento el error en validación mejoraría. La conclusión de esta visualización es que hemose seleccionado un punto en el que no va a mejorar mas y es probable que con mas datos de entrenamiento caiga en overfiting."
+        )
 
-# df_filtered.rename(columns={"latidtud": "lat", "longitud": "lon"}, inplace=True)
-# # st.write(df)
+        curva = Image.open("recursos/curva_aprendizaje.png")
+        st.image(curva)
 
-# st.map(df_filtered)
+        st.divider()
 
-# filtro_2 = st.sidebar.radio("Elige el nº de cargadores", [1, 2, 3, 4])
+        importancia = Image.open("recursos/feature_importance.png")
+        st.image(importancia)
 
-# st.sidebar.button("Click aquí")
+        st.divider()
 
+        st.write(
+            "Con este scatter podemos ver de manera clara como se dispersan las predicciónes frente los valores reales, cuanto más claros estarán mas cercanos a la linea negra que representa los valores reales y cuanto más coloreados serán predicciones positivas o negativas mas dispersos o alejados de los datos reales."
+        )
+
+        dispersion = Image.open("recursos/dispersion_prediccion.png")
+        st.image(dispersion)
+
+        st.divider()
+
+    # elif seleccion == "Cliente":
+    # df = pd.read_csv("app/recursos/red_recarga_acceso_publico.csv", sep=";")
+
+    # filtro = st.sidebar.selectbox("Selecciona un distrito", df["DISTRITO"].unique())
+    # df_filtered = df[df["DISTRITO"] == filtro]
+    # st.write(df_filtered)
+
+    # file = open("data/heatmap.html", "r")
+    # c.html(file.read(), height=400)
+
+    # df_filtered.rename(columns={"latidtud": "lat", "longitud": "lon"}, inplace=True)
+    # # st.write(df)
+
+    # st.map(df_filtered)
+
+    # filtro_2 = st.sidebar.radio("Elige el nº de cargadores", [1, 2, 3, 4])
+
+    # st.sidebar.button("Click aquí")
+
+    with st.expander("Lecciones aprendidas"):
+        st.write(
+            """Este trabajo ha sido la concatenación de muchas herramientas obtenidas en relativamente poco tiempo. Frustrante en muchas ocasiones ya que el propio aprendizaje lleva intrínseco la visualización de expcionales trabajos y es muy dificil evitar la comparación con uno mismo , olvidando al 100% que somos estudiantes y estamos aprendiendo.
+
+Dicho esto, mis conclusiones sobre las lecciones aprendidas son:
+
+- La dinámica iterativa incremental es una manera maravillosa de no atascarse y afrontar los problemas a su debido momento, cuando ya existe o has creado un contexto para poder abordar algo con mayor profundidad de negocio.
+
+- He concluido (quizá erroneamente,y si es así por favor iluminenme) que en proyectos donde el dataset no esté limpio el porcentaje de tiempo dedicado a la compresion del dataset inicial, al feature engineering, limpieza de datos y creación de nuevas variables propias es practicamente lo más importante y lo que mejores resultados te brindará. Pero en esta ocasión la dimension del proyecto y la prisa por hacer lo "guay" (modelos de ML) ocultaron la realidad y quizá el margen de mejora estaría ahí.
+
+- A pesar de que me ha gustado mucho poder dedicar estas 3 semanas a un proyecto, los resultados no son lo que a mi me gustaría, siendo crítico y haciendo una prueba con datos reales, y teniendo la predicción el modelo no se acerca a lo que en realidad ha sucedido y eso es desalentador, o bien por mi falta de capacidad a la hora de realizar el proyecto o bien por que esto del machine learning como dice un conocido es pseudociencia. """
+        )
+        st.divider()
+        st.write(
+            "Gracias a profesores y a todos mis compañeros, ya que sin su ayuda estoy seguro que esto no hubiese salido, o por lo menos igual."
+        )
+        st.divider()
+        st.write(
+            """Proyecto elaborado por Alejandro Campos Ochoa - DS2309 - 
+
+29/11/2023"""
+        )
 elif seleccion == "Haz tu predicción":
     st.title("¡¡Haz tu predicción!!")
     st.divider()
