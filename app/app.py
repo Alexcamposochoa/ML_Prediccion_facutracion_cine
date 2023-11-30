@@ -61,7 +61,7 @@ if seleccion == "Data Science":
     st.divider()
     st.image(cientificos, width=1400)
     st.divider()
-    with st.expander("Introducción"):
+    with st.expander("Introducción y plan"):
         st.write(
             """
 Se pide la elaboración de un proyecto de machine learning de temática libre, en el cual demostraremos gran parte de las competencias y herramientas adquiridas tanto en analisis como en aprendizaje automatico.
@@ -70,6 +70,8 @@ La temática elegida es sobre el mundo del cine y las películas. Existe una abu
 
 Nuestra variable a predecir en este caso será la facturación, denominada en adelante como 'Gross', y las variables predictoras iniciales incluyen atributos comunes a todas las películas, tales como director, estrella principal, presupuesto, puntuación de la crítica, fecha de lanzamiento, género, entre otros.              """
         )
+        plan = Image.open("recursos/plan.png")
+        st.image(plan)  # , width=1400)
     with st.expander("Dataset Original"):
         df = pd.read_csv("recursos/movies.csv")
         st.write(df.head(7))
