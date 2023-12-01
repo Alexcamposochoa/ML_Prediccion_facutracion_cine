@@ -698,6 +698,11 @@ elif seleccion == "Cliente final":
 
     st.divider()
 
+    b = Image.open("recursos/b.png")
+    st.image(b)
+
+    st.divider()
+
     dos = Image.open("recursos/2.png")
     st.image(dos)
 
