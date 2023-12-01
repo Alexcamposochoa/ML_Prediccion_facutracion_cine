@@ -23,7 +23,7 @@ with open("recursos/final_model.pkl", "rb") as file:
 
 seleccion = st.sidebar.selectbox(
     "Selecciona menu",
-    ["Bienvenida", "Data Science", "Negocio", "Haz tu predicción"],
+    ["Bienvenida", "Data Science", "Cliente final", "Haz tu predicción"],
 )
 
 # flujo del menú lateral
@@ -669,25 +669,6 @@ R2 con PCA: 0.64"""
 
         st.divider()
 
-    # elif seleccion == "Cliente":
-    # df = pd.read_csv("app/recursos/red_recarga_acceso_publico.csv", sep=";")
-
-    # filtro = st.sidebar.selectbox("Selecciona un distrito", df["DISTRITO"].unique())
-    # df_filtered = df[df["DISTRITO"] == filtro]
-    # st.write(df_filtered)
-
-    # file = open("data/heatmap.html", "r")
-    # c.html(file.read(), height=400)
-
-    # df_filtered.rename(columns={"latidtud": "lat", "longitud": "lon"}, inplace=True)
-    # # st.write(df)
-
-    # st.map(df_filtered)
-
-    # filtro_2 = st.sidebar.radio("Elige el nº de cargadores", [1, 2, 3, 4])
-
-    # st.sidebar.button("Click aquí")
-
     with st.expander("Lecciones aprendidas"):
         st.write(
             """Este trabajo ha sido la concatenación de muchas herramientas obtenidas en relativamente poco tiempo. Frustrante en muchas ocasiones ya que el propio aprendizaje lleva intrínseco la visualización de expcionales trabajos y es muy dificil evitar la comparación con uno mismo , olvidando al 100% que somos estudiantes y estamos aprendiendo.
@@ -710,6 +691,54 @@ Dicho esto, mis conclusiones sobre las lecciones aprendidas son:
 
 29/11/2023"""
         )
+
+elif seleccion == "Cliente final":
+    uno = Image.open("recursos/uno.png")
+    st.image(uno)
+
+    st.divider()
+
+    dos = Image.open("recursos/dos.png")
+    st.image(dos)
+
+    st.divider()
+
+    tres = Image.open("recursos/tres.png")
+    st.image(tres)
+
+    st.divider()
+
+    cuatro = Image.open("recursos/cuatro.png")
+    st.image(cuatro)
+
+    st.divider()
+
+    cinco = Image.open("recursos/cinco.png")
+    st.image(cinco)
+
+    st.divider()
+
+    seis = Image.open("recursos/seis.png")
+    st.image(seis)
+
+    st.divider()
+
+    siete = Image.open("recursos/siete.png")
+    st.image(siete)
+
+    st.divider()
+
+    ocho = Image.open("recursos/ocho.png")
+    st.image(ocho)
+
+    st.divider()
+
+    nueve = Image.open("recursos/nueve.png")
+    st.image(nueve)
+
+    st.divider()
+
+
 elif seleccion == "Haz tu predicción":
     st.title("¡¡Haz tu predicción!!")
     st.divider()
