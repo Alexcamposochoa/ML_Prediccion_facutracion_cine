@@ -4,7 +4,10 @@ import streamlit.components.v1 as c
 import numpy as np
 import pandas as pd
 import pickle
+import os
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+# st.image(os.path.join(dir_path,"..","img","board.jpg"), width=650)
 
 # configuración de la página
 
@@ -12,10 +15,13 @@ st.set_page_config(
     page_title="Alex Campos ML", initial_sidebar_state="collapsed", layout="wide"
 )
 
+# st.image(os.path.join(dir_path, "..", "img", "git_image.jpg"))
+
+
 # with open(os.path.join(dir_path, "..", "models", "modelo_lineal", "trained_pol_3.pkl"),"rb") as li:
 #     lin_reg = pickle.load(li)
 
-with open("recursos/final_model.pkl", "rb") as file:
+with open(os.path.join(dir_path, "..", "recursos", "final_model.pkl", "rb")) as file:
     final_model = pickle.load(file)
 
 
@@ -34,7 +40,9 @@ if seleccion == "Bienvenida":
     # with cent_co:
     st.title("""Bienvenidos a Predicting Success""")
     st.divider()
-    logo = Image.open("recursos/logo.jpg")
+    logo = Image.open(
+        os.path.join(dir_path, "..", "recursos", "logo.jpg")("recursos/logo.jpg")
+    )
     # left_co, cent_co, last_co = st.columns(3)
     # with cent_co:
     st.image(logo, width=1400)
@@ -56,7 +64,9 @@ if seleccion == "Bienvenida":
 # creamos página de "Data Science"
 
 if seleccion == "Data Science":
-    cientificos = Image.open("recursos/cientificos_lab.jpg")
+    cientificos = Image.open(
+        os.path.join(dir_path, "..", "recursos", "cientificos_lab.jpg")
+    )
     st.title("Memoria técnica")
     st.divider()
     st.image(cientificos, width=1400)
@@ -70,7 +80,7 @@ La temática elegida es sobre el mundo del cine y las películas. Existe una abu
 
 Nuestra variable a predecir en este caso será la facturación, denominada en adelante como 'Gross', y las variables predictoras iniciales incluyen atributos comunes a todas las películas, tales como director, estrella principal, presupuesto, puntuación de la crítica, fecha de lanzamiento, género, entre otros.              """
         )
-        plan = Image.open("recursos/plan.png")
+        plan = Image.open(os.path.join(dir_path, "..", "recursos", "plan.png"))
         st.image(plan)  # , width=1400)
     with st.expander("Dataset Original"):
         df = pd.read_csv("recursos/movies.csv")
@@ -95,7 +105,9 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
 
     with st.expander("EDA inicial"):
         st.write("Distribución de la variable target")
-        distribucion_target = Image.open("recursos/distribucion_target_incial.png")
+        distribucion_target = Image.open(
+            os.path.join(dir_path, "..", "recursos", "distribucion_target_incial.png")
+        )
         # left_co, cent_co, last_co = st.columns(3)
         # with cent_co:
         st.image(distribucion_target)
@@ -103,12 +115,14 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
 
         st.write("Scatters de distribucion")
         # left_co, cent_co, last_co = st.columns(3)
-        scatters = Image.open("recursos/scatters.png")
+        scatters = Image.open(os.path.join(dir_path, "..", "recursos", "scatters.png"))
         # with cent_co:
         st.image(scatters)
         st.divider()
         st.write("Heatmap")
-        heatmap = Image.open("recursos/heatmap_inicial.png")
+        heatmap = Image.open(
+            os.path.join(dir_path, "..", "recursos", "heatmap_inicial.png")
+        )
         # left_co, cent_co, last_co = st.columns(3)
         # with cent_co:
         st.image(heatmap)
@@ -283,20 +297,30 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
             "Llegamos este punto en el que la transformación logaritmica Box-Cox nos ayuda a cambiar la forma de nuestros datos y conseguir una distribución normal, nos planteamos si es necesaria la implementación de esta transformación a alguna variable más e incluso todo el dataset."
         )
         st.divider()
-        distribucion_gross = Image.open("recursos/distribucion_gross.png")
+        distribucion_gross = Image.open(
+            os.path.join(dir_path, "..", "recursos", "distribucion_gross.png")
+        )
         st.image(distribucion_gross)
         st.divider()
-        distribucion_general = Image.open("recursos/distribuciones_general.png")
+        distribucion_general = Image.open(
+            os.path.join(dir_path, "..", "recursos", "distribuciones_general.png")
+        )
         st.image(distribucion_general)
         st.divider()
-        distribucion_votes = Image.open("recursos/distribucion_votes.png")
+        distribucion_votes = Image.open(
+            os.path.join(dir_path, "..", "recursos", "distribucion_votes.png")
+        )
         st.image(distribucion_votes)
         st.divider()
-        distribucion_budget = Image.open("recursos/distribucion_budget.png")
+        distribucion_budget = Image.open(
+            os.path.join(dir_path, "..", "recursos", "distribucion_budget.png")
+        )
         st.image(distribucion_budget)
 
     with st.expander("Correlación final"):
-        heatmap_f = Image.open("recursos/heatmap_final.png")
+        heatmap_f = Image.open(
+            os.path.join(dir_path, "..", "recursos", "heatmap_final.png")
+        )
         st.image(heatmap_f)
 
     st.title("Modelado")
@@ -604,7 +628,7 @@ R2: 0.64
         st.write(
             """La métrica en la que queremos basarnos para la eleccion del modelo es el Mape debido a que estamos hablando de predecir cientos de miles de dolares y creemos que resulta mas entendible manejar porcentajes de error."""
         )
-        metricas = Image.open("recursos/metricas.png")
+        metricas = Image.open(os.path.join(dir_path, "..", "recursos", "metricas.png"))
         st.image(metricas)
 
         st.divider()
@@ -650,12 +674,16 @@ R2 con PCA: 0.64"""
             "Aquí podemos visualizar el recorrido de la curva de aprendizaje, es decir podemos ver si añadiendo mas datos de entrenamiento el error en validación mejoraría. La conclusión de esta visualización es que hemose seleccionado un punto en el que no va a mejorar mas y es probable que con mas datos de entrenamiento caiga en overfiting."
         )
 
-        curva = Image.open("recursos/curva_aprendizaje.png")
+        curva = Image.open(
+            os.path.join(dir_path, "..", "recursos", "curva_aprendizaje.png")
+        )
         st.image(curva)
 
         st.divider()
 
-        importancia = Image.open("recursos/feature_importance.png")
+        importancia = Image.open(
+            os.path.join(dir_path, "..", "recursos", "feature_importance.png")
+        )
         st.image(importancia)
 
         st.divider()
@@ -664,7 +692,9 @@ R2 con PCA: 0.64"""
             "Con este scatter podemos ver de manera clara como se dispersan las predicciónes frente los valores reales, cuanto más claros estarán mas cercanos a la linea negra que representa los valores reales y cuanto más coloreados serán predicciones positivas o negativas mas dispersos o alejados de los datos reales."
         )
 
-        dispersion = Image.open("recursos/dispersion_prediccion.png")
+        dispersion = Image.open(
+            os.path.join(dir_path, "..", "recursos", "dispersion_prediccion.png")
+        )
         st.image(dispersion)
 
         st.divider()
@@ -693,47 +723,47 @@ Dicho esto, mis conclusiones sobre las lecciones aprendidas son:
         )
 
 elif seleccion == "Cliente final":
-    uno = Image.open("recursos/1.png")
+    uno = Image.open(os.path.join(dir_path, "..", "recursos", "1.png"))
     st.image(uno)
 
     st.divider()
 
-    dos = Image.open("recursos/2.png")
+    dos = Image.open(os.path.join(dir_path, "..", "recursos", "2.png"))
     st.image(dos)
 
     st.divider()
 
-    tres = Image.open("recursos/3.png")
+    tres = Image.open(os.path.join(dir_path, "..", "recursos", "3.png"))
     st.image(tres)
 
     st.divider()
 
-    cuatro = Image.open("recursos/4.png")
+    cuatro = Image.open(os.path.join(dir_path, "..", "recursos", "4.png"))
     st.image(cuatro)
 
     st.divider()
 
-    cinco = Image.open("recursos/5.png")
+    cinco = Image.open(os.path.join(dir_path, "..", "recursos", "5.png"))
     st.image(cinco)
 
     st.divider()
 
-    seis = Image.open("recursos/6.png")
+    seis = Image.open(os.path.join(dir_path, "..", "recursos", "6.png"))
     st.image(seis)
 
     st.divider()
 
-    siete = Image.open("recursos/7.png")
+    siete = Image.open(os.path.join(dir_path, "..", "recursos", "7.png"))
     st.image(siete)
 
     st.divider()
 
-    ocho = Image.open("recursos/8.png")
+    ocho = Image.open(os.path.join(dir_path, "..", "recursos", "8.png"))
     st.image(ocho)
 
     st.divider()
 
-    nueve = Image.open("recursos/9.png")
+    nueve = Image.open(os.path.join(dir_path, "..", "recursos", "9.png"))
     st.image(nueve)
 
     st.divider()
