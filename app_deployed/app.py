@@ -6,7 +6,12 @@ import pandas as pd
 import pickle
 import os
 
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
+file_path = os.path.join(dir_path, "nombre_del_archivo.txt")
+
+
+# dir_path = os.path.dirname(os.path.realpath(__file__))
 # st.image(os.path.join(dir_path,"..","img","board.jpg"), width=650)
 
 # configuración de la página
@@ -22,7 +27,7 @@ st.set_page_config(
 #     lin_reg = pickle.load(li)
 
 with open(
-    os.path.join(dir_path, "app_deployed", "recursos", "final_model.pkl", "rb")
+    os.path.join(file_path, "app_deployed", "recursos", "final_model.pkl", "rb")
 ) as file:
     final_model = pickle.load(file)
 
