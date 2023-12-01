@@ -21,7 +21,9 @@ st.set_page_config(
 # with open(os.path.join(dir_path, "..", "models", "modelo_lineal", "trained_pol_3.pkl"),"rb") as li:
 #     lin_reg = pickle.load(li)
 
-with open(os.path.join(dir_path, "recursos", "final_model.pkl", "rb")) as file:
+with open(
+    os.path.join(dir_path, "app_deployed", "recursos", "final_model.pkl", "rb")
+) as file:
     final_model = pickle.load(file)
 
 
@@ -41,7 +43,9 @@ if seleccion == "Bienvenida":
     st.title("""Bienvenidos a Predicting Success""")
     st.divider()
     logo = Image.open(
-        os.path.join(dir_path, "recursos", "logo.jpg")("recursos/logo.jpg")
+        os.path.join(dir_path, "app_deployed", "recursos", "logo.jpg")(
+            "recursos/logo.jpg"
+        )
     )
     # left_co, cent_co, last_co = st.columns(3)
     # with cent_co:
@@ -64,7 +68,9 @@ if seleccion == "Bienvenida":
 # creamos página de "Data Science"
 
 if seleccion == "Data Science":
-    cientificos = Image.open(os.path.join(dir_path, "recursos", "cientificos_lab.jpg"))
+    cientificos = Image.open(
+        os.path.join(dir_path, "app_deployed", "recursos", "cientificos_lab.jpg")
+    )
     st.title("Memoria técnica")
     st.divider()
     st.image(cientificos, width=1400)
@@ -78,10 +84,14 @@ La temática elegida es sobre el mundo del cine y las películas. Existe una abu
 
 Nuestra variable a predecir en este caso será la facturación, denominada en adelante como 'Gross', y las variables predictoras iniciales incluyen atributos comunes a todas las películas, tales como director, estrella principal, presupuesto, puntuación de la crítica, fecha de lanzamiento, género, entre otros.              """
         )
-        plan = Image.open(os.path.join(dir_path, "recursos", "plan.png"))
+        plan = Image.open(
+            os.path.join(dir_path, "app_deployed", "recursos", "plan.png")
+        )
         st.image(plan)  # , width=1400)
     with st.expander("Dataset Original"):
-        df = pd.read_csv("recursos/movies.csv")
+        df = pd.read_csv(
+            os.path.join(dir_path, "app_deployed", "recursos", "movies.csv")
+        )
         st.write(df.head(7))
         st.write("7668 rows y 15 columns")
         st.divider()
@@ -104,7 +114,9 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
     with st.expander("EDA inicial"):
         st.write("Distribución de la variable target")
         distribucion_target = Image.open(
-            os.path.join(dir_path, "recursos", "distribucion_target_incial.png")
+            os.path.join(
+                dir_path, "app_deployed", "recursos", "distribucion_target_incial.png"
+            )
         )
         # left_co, cent_co, last_co = st.columns(3)
         # with cent_co:
@@ -113,12 +125,16 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
 
         st.write("Scatters de distribucion")
         # left_co, cent_co, last_co = st.columns(3)
-        scatters = Image.open(os.path.join(dir_path, "recursos", "scatters.png"))
+        scatters = Image.open(
+            os.path.join(dir_path, "app_deployed", "recursos", "scatters.png")
+        )
         # with cent_co:
         st.image(scatters)
         st.divider()
         st.write("Heatmap")
-        heatmap = Image.open(os.path.join(dir_path, "recursos", "heatmap_inicial.png"))
+        heatmap = Image.open(
+            os.path.join(dir_path, "app_deployed", "recursos", "heatmap_inicial.png")
+        )
         # left_co, cent_co, last_co = st.columns(3)
         # with cent_co:
         st.image(heatmap)
@@ -239,7 +255,9 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
         )
         st.divider()
         st.write("Dataset numérico")
-        dfnumeros = pd.read_csv("recursos/df_numerico_head.csv")
+        dfnumeros = pd.read_csv(
+            os.path.join(dir_path, "app_deployed", "recursos", "df_numerico_head.csv")
+        )
         st.write(dfnumeros)
         st.divider()
 
@@ -294,27 +312,33 @@ Nuestra variable a predecir en este caso será la facturación, denominada en ad
         )
         st.divider()
         distribucion_gross = Image.open(
-            os.path.join(dir_path, "recursos", "distribucion_gross.png")
+            os.path.join(dir_path, "app_deployed", "recursos", "distribucion_gross.png")
         )
         st.image(distribucion_gross)
         st.divider()
         distribucion_general = Image.open(
-            os.path.join(dir_path, "recursos", "distribuciones_general.png")
+            os.path.join(
+                dir_path, "app_deployed", "recursos", "distribuciones_general.png"
+            )
         )
         st.image(distribucion_general)
         st.divider()
         distribucion_votes = Image.open(
-            os.path.join(dir_path, "recursos", "distribucion_votes.png")
+            os.path.join(dir_path, "app_deployed", "recursos", "distribucion_votes.png")
         )
         st.image(distribucion_votes)
         st.divider()
         distribucion_budget = Image.open(
-            os.path.join(dir_path, "recursos", "distribucion_budget.png")
+            os.path.join(
+                dir_path, "app_deployed", "recursos", "distribucion_budget.png"
+            )
         )
         st.image(distribucion_budget)
 
     with st.expander("Correlación final"):
-        heatmap_f = Image.open(os.path.join(dir_path, "recursos", "heatmap_final.png"))
+        heatmap_f = Image.open(
+            os.path.join(dir_path, "app_deployed", "recursos", "heatmap_final.png")
+        )
         st.image(heatmap_f)
 
     st.title("Modelado")
@@ -622,7 +646,9 @@ R2: 0.64
         st.write(
             """La métrica en la que queremos basarnos para la eleccion del modelo es el Mape debido a que estamos hablando de predecir cientos de miles de dolares y creemos que resulta mas entendible manejar porcentajes de error."""
         )
-        metricas = Image.open(os.path.join(dir_path, "recursos", "metricas.png"))
+        metricas = Image.open(
+            os.path.join(dir_path, "app_deployed", "recursos", "metricas.png")
+        )
         st.image(metricas)
 
         st.divider()
@@ -668,13 +694,15 @@ R2 con PCA: 0.64"""
             "Aquí podemos visualizar el recorrido de la curva de aprendizaje, es decir podemos ver si añadiendo mas datos de entrenamiento el error en validación mejoraría. La conclusión de esta visualización es que hemose seleccionado un punto en el que no va a mejorar mas y es probable que con mas datos de entrenamiento caiga en overfiting."
         )
 
-        curva = Image.open(os.path.join(dir_path, "recursos", "curva_aprendizaje.png"))
+        curva = Image.open(
+            os.path.join(dir_path, "app_deployed", "recursos", "curva_aprendizaje.png")
+        )
         st.image(curva)
 
         st.divider()
 
         importancia = Image.open(
-            os.path.join(dir_path, "recursos", "feature_importance.png")
+            os.path.join(dir_path, "app_deployed", "recursos", "feature_importance.png")
         )
         st.image(importancia)
 
@@ -685,7 +713,9 @@ R2 con PCA: 0.64"""
         )
 
         dispersion = Image.open(
-            os.path.join(dir_path, "recursos", "dispersion_prediccion.png")
+            os.path.join(
+                dir_path, "app_deployed", "recursos", "dispersion_prediccion.png"
+            )
         )
         st.image(dispersion)
 
@@ -715,47 +745,47 @@ Dicho esto, mis conclusiones sobre las lecciones aprendidas son:
         )
 
 elif seleccion == "Cliente final":
-    uno = Image.open(os.path.join(dir_path, "recursos", "1.png"))
+    uno = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "1.png"))
     st.image(uno)
 
     st.divider()
 
-    dos = Image.open(os.path.join(dir_path, "recursos", "2.png"))
+    dos = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "2.png"))
     st.image(dos)
 
     st.divider()
 
-    tres = Image.open(os.path.join(dir_path, "recursos", "3.png"))
+    tres = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "3.png"))
     st.image(tres)
 
     st.divider()
 
-    cuatro = Image.open(os.path.join(dir_path, "recursos", "4.png"))
+    cuatro = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "4.png"))
     st.image(cuatro)
 
     st.divider()
 
-    cinco = Image.open(os.path.join(dir_path, "recursos", "5.png"))
+    cinco = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "5.png"))
     st.image(cinco)
 
     st.divider()
 
-    seis = Image.open(os.path.join(dir_path, "recursos", "6.png"))
+    seis = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "6.png"))
     st.image(seis)
 
     st.divider()
 
-    siete = Image.open(os.path.join(dir_path, "recursos", "7.png"))
+    siete = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "7.png"))
     st.image(siete)
 
     st.divider()
 
-    ocho = Image.open(os.path.join(dir_path, "recursos", "8.png"))
+    ocho = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "8.png"))
     st.image(ocho)
 
     st.divider()
 
-    nueve = Image.open(os.path.join(dir_path, "recursos", "9.png"))
+    nueve = Image.open(os.path.join(dir_path, "app_deployed", "recursos", "9.png"))
     st.image(nueve)
 
     st.divider()
