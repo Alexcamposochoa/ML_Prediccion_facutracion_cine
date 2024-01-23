@@ -1,3 +1,5 @@
+<img src="images/banner.jpg" width="1900" />
+
 # Predicción de Facturación de Películas de cine
 
 Este proyecto de machine learning tiene como objetivo predecir la facturación de películas de cine utilizando características generales como el director, la estrella principal, presupuesto y género. La aplicación final permite a productoras y distribuidoras tomar decisiones informadas al lanzar nuevas películas.
